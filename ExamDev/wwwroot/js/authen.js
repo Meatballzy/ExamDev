@@ -1,0 +1,3 @@
+﻿$("#authenList").DataTable({
+    responsive: true,
+});

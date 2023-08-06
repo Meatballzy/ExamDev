@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Report>
+
+<div class="container mt-3">
+    <div>
+        <div class="d-flex justify-content-between mb-3">
+            <h3>Log</h3>
+            <a asp-controller="Report" asp-action="Create" class="btn btn-success fs-5">Create</a>
+        </div>
+
+        <div>
+            <table id="authenList" class="table table-striped nowrap" style="width:100%">
+            <thead>
+                    <tr>
+                        <th width="15%">No</th>
+                        <th width="15%">Name</th>
+                        <th width="15%">Workperfumed</th>
+                        <th width="15%">Days of works</th>
+                        <th width="15%">Status</th>
+                        <th width="15%">Options</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    @foreach (var lg in Model)
+                    {
+                                <tr>
+                                    <td>@lg.Id</td>
+                                        <td><a asp-controller="Report" asp-action="Arp" asp-route-id="@lg.Id">@lg.Respond</a></td>
+                                    <td>@lg.WorkPerformed</td>
+                                    <td>@lg.Days</td>
+                                <td>
+                                @if (lg.Status == true)
+                                {
+                                    <span class="badge bg-success">Complete</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Incomplete</span>
+                                }
+                                </td>
+                                        <td><a asp-controller="Report" asp-action="Edit" asp-route-id="@lg.Id" class="btn btn-warning">Edit</a></td>
+                                 </tr>
+                    }
+                </tbody>   
+        </table>
+       </div>
+    </div>
+</div>
+@section Scripts {
+                     <script src="~/js/authen.js"></script>
+ }

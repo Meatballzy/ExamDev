@@ -2,20 +2,21 @@
 using ExamDev.Infra.Data;
 using ExamDev.Infra.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ExamDev.WebUi.Controllers
 {
-    public class LogController : Controller
+    public class ReportController : Controller
     {
         private readonly AppDbContext _context;
-        public LogController(AppDbContext context)
+        public ReportController(AppDbContext context)
         {
             _context = context;
         }
         public IActionResult Index()
         {
-            IEnumerable<Log> AllLog = _context.Logs;
-            return View(AllLog);
+            IEnumerable<Report> AllRep = _context.Reports;
+            return View(AllRep);
         }
         public IActionResult Create()
         {
@@ -31,7 +32,7 @@ namespace ExamDev.WebUi.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Log lg)
+        public IActionResult Create(Report lg)
         {
             var userList = (from a in _context.Users
                             where (a.Status == true)
@@ -65,7 +66,7 @@ namespace ExamDev.WebUi.Controllers
             {
                 return NotFound();
             }
-            var data = _context.Logs.Find(id);
+            var data = _context.Reports.Find(id);
             if (data != null)
             {
                 return View(data);
@@ -75,24 +76,40 @@ namespace ExamDev.WebUi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Log data)
+        public IActionResult Edit(Report data)
         {
             if (ModelState.IsValid)
             {
+                var diffOfDates = data.End.Subtract(data.Start);
+                data.Days = diffOfDates.Days;
                 _context.Update(data);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(data);
         }
-        public IActionResult Report(string? name)
+
+        public IActionResult Arp(int? id)
         {
-            var data = _context.Logs.Find(name);
+            var userList = (from a in _context.Users
+                            where (a.Status == true)
+                            select new UserVM
+                            {
+                                Id = a.Id,
+                                FullName = a.FullName,
+                            }).ToList();
+            ViewBag.UserList = userList;
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var data = _context.Reports.Find(id);
             if (data != null)
             {
                 return View(data);
             }
             return View();
         }
+
     }
 }

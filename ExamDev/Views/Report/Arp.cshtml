@@ -1,0 +1,121 @@
+﻿@model ExamDev.Infra.Report
+<div class="container mt-4">
+    <form method="post" asp-controller="Report" asp-action="Edit">
+    <h4>Report</h4>
+    <div class="card p-4 mt-3">
+        <div class="row g-3">
+
+            <div class="col-sm-6">
+              <label asp-for="Module" class="form-label fw-bolder">Module</label>
+              <input asp-for="Module" type="text" class="form-control" placeholder="Module" disabled>
+            </div>
+
+            <div class="col-sm-6">
+              <label asp-for="SubModule" class="form-label fw-bolder">SubModule</label>
+              <input asp-for="SubModule" type="text" class="form-control" placeholder="SubModule" disabled>
+            </div>
+
+            <div class="col-sm-6">
+              <label asp-for="JobDescript" class="form-label fw-bolder">JobDescript</label>
+              <input asp-for="JobDescript" type="text" class="form-control" placeholder="JobDescript" disabled>
+            </div>
+
+            <div class="col-sm-6">
+              <label asp-for="JobType" class="form-label fw-bolder">JobType</label>
+              <input asp-for="JobType" type="text" class="form-control" placeholder="JobType" disabled>
+            </div>
+
+            <div class="col-sm-12">
+              <label asp-for="WorkPerformed" class="form-label fw-bolder">WorkPerformed</label>
+              <textarea asp-for="WorkPerformed" type="text" class="form-control" placeholder="WorkPerformed" rows="4" disabled></textarea>
+            </div>
+
+            <div class="col-sm-12">
+              <label asp-for="Solution" class="form-label fw-bolder">Solution</label>
+              <textarea asp-for="Solution" type="text" class="form-control" placeholder="Solution" rows="4" disabled></textarea>
+            </div>
+
+            <div class="col-sm-4">
+              <label asp-for="PjId" class="form-label fw-bolder">PjId</label>
+              <input asp-for="PjId" type="text" class="form-control" placeholder="PjId" disabled>
+            </div>
+
+            <div class="col-sm-4">
+              <label asp-for="Type" class="form-label fw-bolder">Type</label>
+              <input asp-for="Type" type="text" class="form-control" placeholder="Type" disabled>
+            </div>
+
+            <div class="col-sm-4">
+              <label asp-for="Receiveway" class="form-label fw-bolder">Receiveway</label>
+              <input asp-for="Receiveway" type="text" class="form-control" placeholder="Receiveway" disabled>
+            </div>
+
+             <div class="col-4 mt-3">
+                <label asp-for="Informer" class="ms-2 fw-bolder"></label>
+                <select asp-for="Informer" class="form-select border-0 shadow mt-2" disabled> 
+                <option disabled selected>--Select Category</option>
+                        @foreach (var item in ViewBag.UserList)
+                        {
+                                        <option value="@item.FullName">@item.FullName</option>
+                        }
+                </select>
+              <span asp-validation-for="Informer" class="text-danger"></span>
+            </div>
+
+            <div class="col-sm-2">
+              <label asp-for="Tel" class="form-label fw-bolder">Tel</label>
+              <input asp-for="Tel" type="text" class="form-control" placeholder="Tel" disabled>
+            </div>
+
+             <div class="col-6 mt-3">
+                <label asp-for="Respond" class="ms-2 fw-bolder"></label>
+                <select asp-for="Respond" class="form-select border-0 shadow mt-2" disabled>
+                <option disabled selected>--Select Category</option>
+                        @foreach (var item in ViewBag.UserList)
+                        {
+                                        <option value="@item.FullName">@item.FullName</option>
+                        }
+                </select> 
+              <span asp-validation-for="Respond" class="text-danger"></span>
+            </div>
+
+            <div class="col-sm-6">
+              <label asp-for="Start" class="form-label fw-bolder">Start</label>
+              <input asp-for="Start" type="datetime-local" class="form-control" placeholder="Start" disabled>
+            </div>
+
+            <div class="col-sm-6">
+              <label asp-for="End" class="form-label fw-bolder">End</label>
+              <input asp-for="End" type="datetime-local" class="form-control" placeholder="End" disabled>
+            </div>
+
+            <div class="mb-2">
+                    <label asp-for="Status" class="fw-bolder"></label>
+                    <div class="form-group d-flex">
+
+                        <div class="form-check pe-2">
+                            @{
+                                string status0 = Model.Status ? "checked" : "";
+                                string status1 = Model.Status ? "" : "checked";
+                            }
+                            <input name="Status" class="form-check-input" type="radio" disabled value="true" @status0>
+                            <label class="form-check-label" for="status0">
+                                Complete
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="Status" class="form-check-input" type="radio" disabled value="false" @status1>
+                            <label class="form-check-label" for="status1">
+                                Incomplete
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="d-flex mt-3">
+                <a asp-action="Index" class="btn btn-secondary me-2">Back</a>
+            </div>
+          </div>
+          </div>
+           </form>
+</div>

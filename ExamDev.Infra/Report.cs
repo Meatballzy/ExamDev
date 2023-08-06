@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExamDev.Infra
 {
-    public class Log
+    public class Report
     {
         [Key]
         public int Id { get; set; }

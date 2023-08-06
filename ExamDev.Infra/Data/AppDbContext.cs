@@ -15,7 +15,7 @@ namespace ExamDev.Infra.Data
         }
         public DbSet<Authen> Authens { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Log> Logs { get; set; }
+        public DbSet<Report> Reports { get; set; }
     }
 
 }
